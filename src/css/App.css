@@ -1,0 +1,21 @@
+.container {
+  margin: 0 auto;
+}
+
+.doctor-card {
+  display: grid;
+  grid-template-areas: "doctor-image credentials location . . . . .";
+}
+
+.doctor-image {
+  grid-area: doctor-image;
+  width: 7rem;
+}
+
+.credentials {
+  grid-area: credentials;
+}
+
+.location {
+  grid-area: location;
+}

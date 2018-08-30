@@ -46,9 +46,14 @@ export default class Home extends Component {
   };
 
   handleRangeChange = e => {
-    this.setState({
-      miles: e.target.value
-    });
+    const doctors = this.state.doctors;
+    if (doctors.length === 0) {
+      alert("Please enter zip to filter");
+    } else {
+      this.setState({
+        miles: e.target.value
+      });
+    }
   };
   sendToDoctorLocation = doctorLocation => {
     window.location.href = doctorLocation;

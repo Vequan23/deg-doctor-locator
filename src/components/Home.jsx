@@ -127,7 +127,7 @@ export default class Home extends Component {
             Search
           </button>
         </div>
-        <div className="filter-container">
+        <div className="filter-container card">
           <div className="distance-filter">
             <label htmlFor="distance">Distance</label>
             <input

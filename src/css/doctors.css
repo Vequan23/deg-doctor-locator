@@ -38,14 +38,16 @@
 .specialties h4 {
   white-space: pre-line;
   font-weight: bold;
+  font-size: 20px;
 }
 
 .specialties {
   grid-area: credentials;
-  width: 20rem;
+  width: 14rem;
 }
 
 .specialties h3 {
   color: #25aae1;
   cursor: pointer;
+  font-size: 20px;
 }

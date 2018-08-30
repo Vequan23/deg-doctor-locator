@@ -28,4 +28,9 @@
 
 .distance-filter {
   border-bottom: 2px solid #f2f7fa;
+  margin-bottom: 2px;
+}
+
+.gender-filter {
+  margin-top: 5px;
 }

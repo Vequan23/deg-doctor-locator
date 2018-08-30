@@ -18,6 +18,10 @@
   color: #25aae1;
 }
 
+.doctor-location-container p {
+  font-weight: bold;
+}
+
 .doctor-location-container span:hover {
   color: #25aae1;
   cursor: pointer;
@@ -32,16 +36,17 @@
   white-space: pre-line;
 }
 
-.credentials h4 {
+.specialties h4 {
   white-space: pre-line;
+  font-weight: bold;
 }
 
-.credentials {
+.specialties {
   grid-area: credentials;
   width: 20rem;
 }
 
-.credentials h3 {
+.specialties h3 {
   color: #25aae1;
   cursor: pointer;
 }

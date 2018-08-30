@@ -1,8 +1,9 @@
 .doctor-card {
   display: grid;
-  grid-template-areas: "doctor-image credentials location";
-  margin-bottom: 2rem;
-  padding: 10px;
+  grid-template-areas: "doctor-image   credentials . . location";
+  margin-bottom: 4rem;
+  margin-right: 7rem;
+  margin-left: 7rem;
 }
 
 .doctor-card {
@@ -15,10 +16,12 @@
 
 .credentials {
   grid-area: credentials;
+  width: 12rem;
 }
 
 .location {
   grid-area: location;
+  width: 12rem;
 }
 
 .logo {
@@ -41,6 +44,9 @@
 .filter-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  margin-right: 7rem;
+  margin-left: 7rem;
+  margin-bottom: 4rem;
 }
 
 .location p {
@@ -52,7 +58,7 @@
 }
 
 .zip-input {
-  margin-bottom: 2rem;
+  margin-bottom: 4rem;
   display: grid;
   grid-template-columns: 3fr 1fr;
   margin-right: 7rem;

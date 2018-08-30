@@ -9,7 +9,7 @@ export default class Home extends Component {
   state = {
     doctors: doctorsJson.results,
     zip: [],
-    miles: 0,
+    miles: "All",
     gender: "noPreference",
     showDoctors: false
   };
@@ -41,6 +41,10 @@ export default class Home extends Component {
     const miles = this.state.miles;
     let originalDoctorsData = doctorsJson.results;
 
+    console.log("this is gender" + " " + gender);
+    console.log("this is miles" + " " + miles);
+    console.log(this.state.doctors);
+
     let doctorsFilteredByGender = originalDoctorsData.filter(doctor => {
       if (gender === "Male" || gender === "Female") {
         return doctor.gender === gender;
@@ -50,7 +54,11 @@ export default class Home extends Component {
     });
 
     let doctorsFilteredByDistance = doctorsFilteredByGender.filter(doctor => {
-      return Math.round(doctor.locations[0].distance) <= ;
+      if (miles === "All") {
+        return doctor;
+      } else {
+        return Math.round(doctor.locations[0].distance) <= miles;
+      }
     });
 
     this.setState({
@@ -66,26 +74,30 @@ export default class Home extends Component {
     });
   };
 
-  handleRangeChange = e => {
-    const doctors = this.state.doctors;
-    const miles = this.state.miles;
-    if (doctors.length === 0) {
+  handleRangeChange = async e => {
+    const showDoctors = this.state.showDoctors;
+    if (!showDoctors) {
       alert("Please enter zip to filter");
     } else {
       this.setState({
-        miles: e.target.value
+        miles: await e.target.value
       });
+      await this.filterDoctors();
     }
-
-    this.filterDoctors;
   };
 
   handleGenderChange = async e => {
-    this.setState({
-      gender: await e.target.value
-    });
+    const showDoctors = this.state.showDoctors;
+    if (!showDoctors) {
+      e.preventDefault();
+      alert("Please enter zip to filter");
+    } else {
+      this.setState({
+        gender: await e.target.value
+      });
 
-    this.filterDoctors();
+      await this.filterDoctors();
+    }
   };
   sendToDoctorLocation = doctorLocation => {
     window.location.href = doctorLocation;
@@ -121,10 +133,9 @@ export default class Home extends Component {
             <input
               onChange={this.handleRangeChange}
               type="range"
-              min="0"
+              min="5"
               max="25"
               step="5"
-              id="myRange"
               value={miles}
             />
             <input

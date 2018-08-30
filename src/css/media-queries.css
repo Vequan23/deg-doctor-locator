@@ -1,0 +1,23 @@
+@media only screen and (max-width: 992px) {
+  .side-bar-doctor-container {
+    grid-template-columns: 1fr;
+  }
+
+  .filter-container {
+    display: grid;
+    grid-template-columns: auto auto;
+  }
+
+  .distance-filter {
+    margin-bottom: 10px;
+    border-bottom: 0px;
+  }
+
+  .filter-container {
+    margin-bottom: 0px;
+  }
+
+  .zip-input {
+    margin-bottom: 5px;
+  }
+}

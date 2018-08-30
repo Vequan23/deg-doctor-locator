@@ -50,3 +50,8 @@
   cursor: pointer;
   font-size: 20px;
 }
+
+.side-bar-doctor-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}

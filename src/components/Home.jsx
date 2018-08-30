@@ -112,8 +112,8 @@ export default class Home extends Component {
           <img className="gradient" src={gradient} alt="" />
           <img className="logo" src={logo} alt="" />
         </header>
-        <div className="showcase">
-          <img className="showcase" src={showcaseImage} alt="" />
+        <div className="hero">
+          <img className="hero" src={showcaseImage} alt="" />
         </div>
         <div className="zip-input">
           <form>

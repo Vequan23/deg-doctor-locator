@@ -1,0 +1,31 @@
+@import "App.css";
+@import "doctors.css";
+@import "zip.css";
+@import "filter.css";
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.logo {
+  width: 10rem;
+  display: block;
+  margin: 0 auto;
+}
+
+.gradient {
+  margin: 0 auto;
+  display: block;
+}
+
+.hero {
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 5rem;
+}
+
+.hidden {
+  display: none;
+}

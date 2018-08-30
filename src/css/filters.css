@@ -1,0 +1,11 @@
+.filter-container {
+  display: grid;
+  grid-template-columns: auto auto;
+  margin-right: 7rem;
+  margin-left: 7rem;
+  margin-bottom: 4rem;
+}
+
+.distance-filter input {
+  margin-left: 2rem;
+}

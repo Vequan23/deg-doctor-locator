@@ -1,0 +1,44 @@
+.doctor-card {
+  display: grid;
+  grid-template-areas: "doctor-image   credentials . . location";
+  margin-bottom: 4rem;
+  margin-right: 7rem;
+  margin-left: 7rem;
+}
+
+.doctor-image {
+  grid-area: doctor-image;
+  width: 7rem;
+}
+
+.doctor-location-container span {
+  color: #25aae1;
+}
+
+.doctor-location-container span:hover {
+  color: #25aae1;
+  cursor: pointer;
+}
+
+.location {
+  grid-area: location;
+  width: 14rem;
+}
+
+.location p {
+  white-space: pre-line;
+}
+
+.credentials h4 {
+  white-space: pre-line;
+}
+
+.credentials {
+  grid-area: credentials;
+  width: 20rem;
+}
+
+.credentials h3 {
+  color: #25aae1;
+  cursor: pointer;
+}

@@ -91,7 +91,7 @@ export default class Home extends Component {
   };
 
   render() {
-    const { doctors, miles, zip } = this.state;
+    const { doctors, miles, zip, showDoctors } = this.state;
 
     return (
       <div>
@@ -149,14 +149,12 @@ export default class Home extends Component {
             </p>
           </div>
           <div className="results-count">
-            <p>Total Results: {doctors ? doctors.length : 0}</p>
+            <p>Total Results: {doctors && showDoctors ? doctors.length : 0}</p>
           </div>
         </div>
         <div
           className={
-            this.state.showDoctors
-              ? "doctor-container"
-              : "hidden doctor-container"
+            showDoctors ? "doctor-container" : "hidden doctor-container"
           }
         >
           {doctors ? (

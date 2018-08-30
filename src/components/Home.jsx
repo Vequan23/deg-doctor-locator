@@ -76,7 +76,7 @@ export default class Home extends Component {
           <div className="distance-filter">
             <label htmlFor="distance">Distance</label>
             <input type="range" min="1" max="100" id="myRange" />
-            <p>Current: All Miles From {this.state.zip}</p>
+            <p>Current: Miles From {this.state.zip}</p>
           </div>
           <div className="results-count">
             <p>Total Results: {doctors.results ? doctors.results.length : 0}</p>

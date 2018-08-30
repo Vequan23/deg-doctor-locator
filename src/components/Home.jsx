@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Doctor from "./Doctor";
-import doctorsJson from "../database/doctors.json";
+import doctorsJson from "../api/doctors.json";
 import gradient from "../assets/images/gradient.png";
 import logo from "../assets/images/logo.svg";
 import showcaseImage from "../assets/images/hospital.png";

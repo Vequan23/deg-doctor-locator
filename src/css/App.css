@@ -1,10 +1,13 @@
-.container {
-  margin: 0 auto;
-}
-
 .doctor-card {
   display: grid;
-  grid-template-areas: "doctor-image credentials location . . . . .";
+  grid-template-areas: "doctor-image credentials location ";
+  margin-bottom: 2rem;
+  grid-area: doctor-card;
+}
+
+.doctor-container {
+  display: grid;
+  grid-template-areas: " ";
 }
 
 .doctor-image {
@@ -18,4 +21,34 @@
 
 .location {
   grid-area: location;
+}
+
+.logo {
+  width: 10rem;
+  display: block;
+  margin: 0 auto;
+}
+
+.gradient {
+  margin: 0 auto;
+  display: block;
+}
+
+.showcase {
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 5rem;
+}
+
+.filter-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.location p {
+  white-space: pre-line;
+}
+
+.credentials h4 {
+  white-space: pre-line;
 }

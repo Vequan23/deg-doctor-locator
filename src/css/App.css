@@ -74,3 +74,12 @@
   background: #5ab44b;
   color: white;
 }
+
+.doctor-location span {
+  color: #25aae1;
+}
+
+.doctor-location span:hover {
+  color: #25aae1;
+  cursor: pointer;
+}

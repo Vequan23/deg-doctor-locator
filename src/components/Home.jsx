@@ -44,6 +44,10 @@ export default class Home extends Component {
     });
   };
 
+  sendToDoctorLocation = doctorLocation => {
+    window.location.href = doctorLocation;
+  };
+
   render() {
     const doctors = this.state.doctors;
 
@@ -83,14 +87,27 @@ export default class Home extends Component {
                   specialty => `${specialty}
             `
                 )}
-                formattedLocation={[
-                  doctor.locations.map(
-                    location => `${location.name}
-                ${Math.round(location.distance)} Miles
-
-                `
+                formattedLocation={doctor.locations.map(location =>
+                  React.createElement(
+                    "div",
+                    { className: "doctor-location" },
+                    React.createElement(
+                      "span",
+                      {
+                        onClick: this.sendToDoctorLocation.bind(
+                          null,
+                          location.url
+                        )
+                      },
+                      location.name
+                    ),
+                    React.createElement(
+                      "p",
+                      null,
+                      `${Math.round(location.distance)} Miles`
+                    )
                   )
-                ]}
+                )}
                 image={doctor.image ? doctor.image : "avatar.png"}
               />
             ))

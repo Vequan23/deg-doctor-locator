@@ -14,9 +14,7 @@ export default function Doctor(props) {
           <h3>{props.fullName}</h3>
           <h4>{props.specialties}</h4>
         </div>
-        <div className="location">
-          <p>{props.formattedLocation}</p>
-        </div>
+        <div className="location">{props.formattedLocation}</div>
       </div>
     );
   }

@@ -8,7 +8,8 @@ import showcaseImage from "../assets/images/hospital.png";
 export default class Home extends Component {
   state = {
     doctors: [],
-    zip: []
+    zip: [],
+    miles: 0
   };
 
   handleZipChange = e => {
@@ -44,6 +45,11 @@ export default class Home extends Component {
     });
   };
 
+  handleRangeChange = e => {
+    this.setState({
+      miles: e.target.value
+    });
+  };
   sendToDoctorLocation = doctorLocation => {
     window.location.href = doctorLocation;
   };
@@ -53,7 +59,7 @@ export default class Home extends Component {
   };
 
   render() {
-    const doctors = this.state.doctors;
+    const { doctors, miles, zip } = this.state;
 
     return (
       <div>
@@ -75,8 +81,18 @@ export default class Home extends Component {
         <div className="filter-container">
           <div className="distance-filter">
             <label htmlFor="distance">Distance</label>
-            <input type="range" min="1" max="100" id="myRange" />
-            <p>Current: Miles From {this.state.zip}</p>
+            <input
+              onChange={this.handleRangeChange}
+              type="range"
+              min="0"
+              max="25"
+              step="5"
+              id="myRange"
+              value={miles}
+            />
+            <p>
+              Current: {miles} Miles From {zip}
+            </p>
           </div>
           <div className="results-count">
             <p>Total Results: {doctors.results ? doctors.results.length : 0}</p>

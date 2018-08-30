@@ -84,3 +84,7 @@
   color: #25aae1;
   cursor: pointer;
 }
+
+.distance-filter input {
+  margin-left: 2rem;
+}

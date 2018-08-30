@@ -117,7 +117,11 @@ export default class Home extends Component {
         </div>
         <div className="zip-input">
           <form>
-            <input onChange={this.handleZipChange} type="text" />
+            <input
+              onChange={this.handleZipChange}
+              placeholder="Zip"
+              type="text"
+            />
           </form>
           <button onClick={this.validateZip} className="btn">
             Search

@@ -6,7 +6,6 @@ export default function Doctor(props) {
       <img
         className="doctor-image"
         src={require(`../assets/images/${props.image}`)}
-        alt=""
       />
       <div className="specialties">
         <h3 onClick={props.sendToDoctorUrl}>{props.fullName}</h3>

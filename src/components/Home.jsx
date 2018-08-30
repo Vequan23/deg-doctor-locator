@@ -41,18 +41,23 @@ export default class Home extends Component {
     const miles = this.state.miles;
     let originalDoctorsData = doctorsJson.results;
 
-    let filteredDoctors = originalDoctorsData.filter(doctor => {
+    let doctorsFilteredByGender = originalDoctorsData.filter(doctor => {
       if (gender === "Male" || gender === "Female") {
         return doctor.gender === gender;
       } else {
         return doctor;
       }
     });
+
+    let doctorsFilteredByDistance = doctorsFilteredByGender.filter(doctor => {
+      return Math.round(doctor.locations[0].distance) <= ;
+    });
+
     this.setState({
       showDoctors: true
     });
     await this.setState({
-      doctors: filteredDoctors
+      doctors: doctorsFilteredByDistance
     });
 
     await window.scroll({

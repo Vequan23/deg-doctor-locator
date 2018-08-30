@@ -184,8 +184,9 @@ export default class Home extends Component {
               </p>
             </div>
             {doctors ? (
-              doctors.map(doctor => (
+              doctors.map((doctor, i) => (
                 <Doctor
+                  key={i}
                   fullName={doctor.fullName}
                   sendToDoctorUrl={this.sendToDoctorUrl.bind(null, doctor.url)}
                   specialties={doctor.specialties.map(

@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import Doctor from "./Doctor";
-import doctorJson from "../database/doctors.json";
+import doctorsJson from "../database/doctors.json";
 import gradient from "../assets/images/gradient.png";
 import logo from "../assets/images/logo.svg";
 import showcaseImage from "../assets/images/hospital.png";
 
 export default class Home extends Component {
   state = {
-    doctors: doctorJson
+    doctors: doctorsJson
   };
   render() {
     const doctors = this.state.doctors.results;
@@ -55,8 +55,10 @@ export default class Home extends Component {
             formattedLocation={doctor.locations.map(
               location => `${location.name}
               ${Math.round(location.distance)} Miles
+
               `
             )}
+            image={doctor.image ? doctor.image : "avatar.png"}
           />
         ))}
       </div>

@@ -6,22 +6,14 @@
   margin-left: 7rem;
 }
 
-.doctor-card {
-}
-
 .doctor-image {
   grid-area: doctor-image;
   width: 7rem;
 }
 
-.credentials {
-  grid-area: credentials;
-  width: 12rem;
-}
-
 .location {
   grid-area: location;
-  width: 12rem;
+  width: 14rem;
 }
 
 .logo {
@@ -57,6 +49,15 @@
   white-space: pre-line;
 }
 
+.credentials {
+  grid-area: credentials;
+  width: 20rem;
+}
+
+.credentials h3 {
+  color: #25aae1;
+}
+
 .zip-input {
   margin-bottom: 4rem;
   display: grid;
@@ -67,4 +68,9 @@
 
 .zip-input input {
   width: 85%;
+}
+
+.zip-input button {
+  background: #5ab44b;
+  color: white;
 }

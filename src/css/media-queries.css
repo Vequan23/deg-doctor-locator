@@ -21,3 +21,69 @@
     margin-bottom: 5px;
   }
 }
+
+@media only screen and (max-width: 767px) {
+  .doctor-card {
+    width: 520px;
+  }
+
+  .specialties h4,
+  h3 {
+    padding-left: 5%;
+  }
+}
+
+@media only screen and (max-width: 656px) {
+  .doctor-card {
+    width: 530px;
+    overflow: hidden;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  .doctor-card {
+    width: 59vh;
+  }
+
+  .doctor-container {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .doctor-card {
+    display: inline-block;
+    text-align: center;
+    width: 250px;
+    margin-left: 21%;
+    margin-right: 20%;
+  }
+
+  .doctor-image {
+    border-radius: 50%;
+    margin-bottom: 2%;
+  }
+
+  .results-count {
+    text-align: center;
+  }
+
+  .filter-container {
+    grid-template-columns: auto;
+    text-align: center;
+  }
+
+  .distance-filter {
+    border-bottom: 2px solid #f2f7fa;
+  }
+
+  .gender-filter {
+    border-bottom: 2px solid #f2f7fa;
+    margin-bottom: 2%;
+  }
+}

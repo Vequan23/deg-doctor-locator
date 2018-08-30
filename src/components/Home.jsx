@@ -7,9 +7,10 @@ import showcaseImage from "../assets/images/hospital.png";
 
 export default class Home extends Component {
   state = {
-    doctors: [],
+    doctors: doctorsJson.results,
     zip: [],
-    miles: 0
+    miles: 0,
+    gender: "noPreference"
   };
 
   handleZipChange = e => {
@@ -35,8 +36,20 @@ export default class Home extends Component {
   };
 
   filterDoctors = async () => {
+    const gender = this.state.gender;
+    const miles = this.state.miles;
+    let originalDoctorsData = doctorsJson.results;
+
+    let filteredDoctors = originalDoctorsData.filter(doctor => {
+      if (gender === "Male" || gender === "Female") {
+        return doctor.gender === gender;
+      } else {
+        return doctor;
+      }
+    });
+
     await this.setState({
-      doctors: doctorsJson
+      doctors: filteredDoctors
     });
 
     await window.scroll({
@@ -47,6 +60,7 @@ export default class Home extends Component {
 
   handleRangeChange = e => {
     const doctors = this.state.doctors;
+    const miles = this.state.miles;
     if (doctors.length === 0) {
       alert("Please enter zip to filter");
     } else {
@@ -54,6 +68,16 @@ export default class Home extends Component {
         miles: e.target.value
       });
     }
+
+    this.filterDoctors;
+  };
+
+  handleGenderChange = async e => {
+    this.setState({
+      gender: await e.target.value
+    });
+
+    this.filterDoctors();
   };
   sendToDoctorLocation = doctorLocation => {
     window.location.href = doctorLocation;
@@ -95,6 +119,28 @@ export default class Home extends Component {
               id="myRange"
               value={miles}
             />
+            <input
+              type="radio"
+              onChange={this.handleGenderChange}
+              value="noPreference"
+              name="gender"
+              defaultChecked
+            />{" "}
+            No Preference
+            <input
+              type="radio"
+              onChange={this.handleGenderChange}
+              value="Male"
+              name="gender"
+            />{" "}
+            Male
+            <input
+              type="radio"
+              onChange={this.handleGenderChange}
+              value="Female"
+              name="gender"
+            />
+            Female
             <p>
               Current: {miles} Miles From {zip}
             </p>
@@ -104,8 +150,8 @@ export default class Home extends Component {
           </div>
         </div>
         <div className="doctor-container">
-          {doctors.results ? (
-            doctors.results.map(doctor => (
+          {doctors ? (
+            doctors.map(doctor => (
               <Doctor
                 fullName={doctor.fullName}
                 sendToDoctorUrl={this.sendToDoctorUrl.bind(null, doctor.url)}

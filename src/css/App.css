@@ -35,7 +35,7 @@
 
 .filter-container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: auto auto;
   margin-right: 7rem;
   margin-left: 7rem;
   margin-bottom: 4rem;

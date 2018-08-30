@@ -71,6 +71,8 @@
 
   .results-count {
     text-align: center;
+    border-top: 2px solid #f2f7fa;
+    padding: 2%;
   }
 
   .filter-container {
@@ -80,10 +82,5 @@
 
   .distance-filter {
     border-bottom: 2px solid #f2f7fa;
-  }
-
-  .gender-filter {
-    border-bottom: 2px solid #f2f7fa;
-    margin-bottom: 2%;
   }
 }

@@ -10,6 +10,17 @@ export default class Home extends Component {
     doctors: [],
     showDoctors: false
   };
+
+  filterDoctors = async () => {
+    await this.setState({
+      doctors: doctorsJson
+    });
+
+    await window.scroll({
+      top: 600,
+      behavior: "smooth"
+    });
+  };
   render() {
     const doctors = this.state.doctors;
 
@@ -26,7 +37,9 @@ export default class Home extends Component {
           <form>
             <input type="text" />
           </form>
-          <button className="btn">Search</button>
+          <button onClick={this.filterDoctors} className="btn">
+            Search
+          </button>
         </div>
         <div className="filter-container">
           <div className="distance-filter">

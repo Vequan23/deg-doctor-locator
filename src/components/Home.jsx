@@ -127,88 +127,93 @@ export default class Home extends Component {
             Search
           </button>
         </div>
-        <div className="filter-container card">
-          <div className="distance-filter">
-            <label htmlFor="distance">Distance</label>
-            <input
-              onChange={this.handleRangeChange}
-              type="range"
-              min="5"
-              max="25"
-              step="5"
-              value={miles}
-            />
-            <input
-              type="radio"
-              onChange={this.handleGenderChange}
-              value="noPreference"
-              name="gender"
-              defaultChecked
-            />{" "}
-            No Preference
-            <input
-              type="radio"
-              onChange={this.handleGenderChange}
-              value="Male"
-              name="gender"
-            />{" "}
-            Male
-            <input
-              type="radio"
-              onChange={this.handleGenderChange}
-              value="Female"
-              name="gender"
-            />
-            Female
-            <p>
-              Current: {miles} Miles From {zip}
-            </p>
-          </div>
-          <div className="results-count">
-            <p>Total Results: {doctors && showDoctors ? doctors.length : 0}</p>
-          </div>
-        </div>
-        <div
-          className={
-            showDoctors ? "doctor-container" : "hidden doctor-container"
-          }
-        >
-          {doctors ? (
-            doctors.map(doctor => (
-              <Doctor
-                fullName={doctor.fullName}
-                sendToDoctorUrl={this.sendToDoctorUrl.bind(null, doctor.url)}
-                specialties={doctor.specialties.map(
-                  specialty => `${specialty}
-            `
-                )}
-                formattedLocation={doctor.locations.map(location =>
-                  React.createElement(
-                    "div",
-                    { className: "doctor-location-container" },
-                    React.createElement(
-                      "span",
-                      {
-                        onClick: this.sendToDoctorLocation.bind(
-                          null,
-                          location.url
-                        )
-                      },
-                      location.name
-                    ),
-                    React.createElement(
-                      "p",
-                      null,
-                      `${Math.round(location.distance)} Miles`
-                    )
-                  )
-                )}
-                image={doctor.image ? doctor.image : "avatar.png"}
+
+        <div className="side-bar-doctor-container">
+          <div className="filter-container card">
+            <div className="distance-filter">
+              <label htmlFor="distance">Distance</label>
+              <input
+                onChange={this.handleRangeChange}
+                type="range"
+                min="5"
+                max="25"
+                step="5"
+                value={miles}
               />
-            ))
-          ) : (
-            <div />
-          )}
+              <input
+                type="radio"
+                onChange={this.handleGenderChange}
+                value="noPreference"
+                name="gender"
+                defaultChecked
+              />{" "}
+              No Preference
+              <input
+                type="radio"
+                onChange={this.handleGenderChange}
+                value="Male"
+                name="gender"
+              />{" "}
+              Male
+              <input
+                type="radio"
+                onChange={this.handleGenderChange}
+                value="Female"
+                name="gender"
+              />
+              Female
+              <p>
+                Current: {miles} Miles From {zip}
+              </p>
+            </div>
+            <div className="results-count">
+              <p>
+                Total Results: {doctors && showDoctors ? doctors.length : 0}
+              </p>
+            </div>
+          </div>
+          <div
+            className={
+              showDoctors ? "doctor-container" : "hidden doctor-container"
+            }
+          >
+            {doctors ? (
+              doctors.map(doctor => (
+                <Doctor
+                  fullName={doctor.fullName}
+                  sendToDoctorUrl={this.sendToDoctorUrl.bind(null, doctor.url)}
+                  specialties={doctor.specialties.map(
+                    specialty => `${specialty}
+            `
+                  )}
+                  formattedLocation={doctor.locations.map(location =>
+                    React.createElement(
+                      "div",
+                      { className: "doctor-location-container" },
+                      React.createElement(
+                        "span",
+                        {
+                          onClick: this.sendToDoctorLocation.bind(
+                            null,
+                            location.url
+                          )
+                        },
+                        location.name
+                      ),
+                      React.createElement(
+                        "p",
+                        null,
+                        `${Math.round(location.distance)} Miles`
+                      )
+                    )
+                  )}
+                  image={doctor.image ? doctor.image : "avatar.png"}
+                />
+              ))
+            ) : (
+              <div />
+            )}
+          </div>
         </div>
       </div>
     );

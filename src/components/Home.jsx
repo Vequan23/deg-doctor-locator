@@ -10,7 +10,8 @@ export default class Home extends Component {
     doctors: doctorsJson.results,
     zip: [],
     miles: 0,
-    gender: "noPreference"
+    gender: "noPreference",
+    showDoctors: false
   };
 
   handleZipChange = e => {
@@ -47,7 +48,9 @@ export default class Home extends Component {
         return doctor;
       }
     });
-
+    this.setState({
+      showDoctors: true
+    });
     await this.setState({
       doctors: filteredDoctors
     });
@@ -146,10 +149,16 @@ export default class Home extends Component {
             </p>
           </div>
           <div className="results-count">
-            <p>Total Results: {doctors.results ? doctors.results.length : 0}</p>
+            <p>Total Results: {doctors ? doctors.length : 0}</p>
           </div>
         </div>
-        <div className="doctor-container">
+        <div
+          className={
+            this.state.showDoctors
+              ? "doctor-container"
+              : "hidden doctor-container"
+          }
+        >
           {doctors ? (
             doctors.map(doctor => (
               <Doctor

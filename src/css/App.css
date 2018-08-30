@@ -88,3 +88,7 @@
 .distance-filter input {
   margin-left: 2rem;
 }
+
+.hidden {
+  display: none;
+}

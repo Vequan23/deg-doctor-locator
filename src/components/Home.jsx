@@ -7,11 +7,11 @@ import showcaseImage from "../assets/images/hospital.png";
 
 export default class Home extends Component {
   state = {
-    doctors: doctorsJson
+    doctors: [],
+    showDoctors: false
   };
   render() {
-    const doctors = this.state.doctors.results;
-    console.log(doctors);
+    const doctors = this.state.doctors;
 
     return (
       <div>
@@ -42,25 +42,31 @@ export default class Home extends Component {
             <p>Current: All Miles From</p>
           </div>
           <div className="results-count">
-            <p>Total Results: {doctors.length}</p>
+            <p>Total Results: {doctors ? doctors.length : 0}</p>
           </div>
         </div>
-        {this.state.doctors.results.map(doctor => (
-          <Doctor
-            fullName={doctor.fullName}
-            specialties={doctor.specialties.map(
-              specialty => `${specialty}
+        <div className="doctor-container">
+          {doctors.results ? (
+            doctors.results.map(doctor => (
+              <Doctor
+                fullName={doctor.fullName}
+                specialties={doctor.specialties.map(
+                  specialty => `${specialty}
             `
-            )}
-            formattedLocation={doctor.locations.map(
-              location => `${location.name}
+                )}
+                formattedLocation={doctor.locations.map(
+                  location => `${location.name}
               ${Math.round(location.distance)} Miles
 
               `
-            )}
-            image={doctor.image ? doctor.image : "avatar.png"}
-          />
-        ))}
+                )}
+                image={doctor.image ? doctor.image : "avatar.png"}
+              />
+            ))
+          ) : (
+            <div />
+          )}
+        </div>
       </div>
     );
   }

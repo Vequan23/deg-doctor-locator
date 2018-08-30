@@ -63,11 +63,6 @@ export default class Home extends Component {
     await this.setState({
       doctors: doctorsFilteredByDistance
     });
-
-    await window.scroll({
-      top: 600,
-      behavior: "smooth"
-    });
   };
 
   handleRangeChange = async e => {
@@ -129,7 +124,7 @@ export default class Home extends Component {
         </div>
 
         <div className="side-bar-doctor-container">
-          <div className="filter-container card">
+          <div className={showDoctors ? "filter-container " : "hidden"}>
             <div className="distance-filter">
               <label htmlFor="distance">Distance</label>
               <input
@@ -140,6 +135,14 @@ export default class Home extends Component {
                 step="5"
                 value={miles}
               />
+              <p>
+                Current: {miles} Miles From {zip}
+              </p>
+            </div>
+
+            <div className="gender-filter">
+              <label htmlFor="distance">Gender</label>
+              <br />
               <input
                 type="radio"
                 onChange={this.handleGenderChange}
@@ -148,6 +151,7 @@ export default class Home extends Component {
                 defaultChecked
               />{" "}
               No Preference
+              <br />
               <input
                 type="radio"
                 onChange={this.handleGenderChange}
@@ -155,6 +159,7 @@ export default class Home extends Component {
                 name="gender"
               />{" "}
               Male
+              <br />
               <input
                 type="radio"
                 onChange={this.handleGenderChange}
@@ -162,14 +167,7 @@ export default class Home extends Component {
                 name="gender"
               />
               Female
-              <p>
-                Current: {miles} Miles From {zip}
-              </p>
-            </div>
-            <div className="results-count">
-              <p>
-                Total Results: {doctors && showDoctors ? doctors.length : 0}
-              </p>
+              <br />
             </div>
           </div>
           <div
@@ -177,6 +175,11 @@ export default class Home extends Component {
               showDoctors ? "doctor-container" : "hidden doctor-container"
             }
           >
+            <div className="results-count">
+              <p>
+                Total Results: {doctors && showDoctors ? doctors.length : 0}
+              </p>
+            </div>
             {doctors ? (
               doctors.map(doctor => (
                 <Doctor

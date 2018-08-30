@@ -31,3 +31,8 @@ body {
 .hidden {
   display: none;
 }
+
+.side-bar-doctor-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}

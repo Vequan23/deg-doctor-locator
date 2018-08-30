@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Doctor(props) {
   return (
-    <div className="doctor-card">
+    <div className="doctor-card ">
       <img
         className="doctor-image"
         src={require(`../assets/images/${props.image}`)}

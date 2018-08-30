@@ -1,6 +1,7 @@
 @import "doctors.css";
 @import "zip.css";
 @import "filters.css";
+@import "media-queries.css";
 
 body {
   margin: 0;

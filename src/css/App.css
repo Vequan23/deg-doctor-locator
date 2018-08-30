@@ -1,13 +1,11 @@
 .doctor-card {
   display: grid;
-  grid-template-areas: "doctor-image credentials location ";
+  grid-template-areas: "doctor-image credentials location";
   margin-bottom: 2rem;
-  grid-area: doctor-card;
+  padding: 10px;
 }
 
-.doctor-container {
-  display: grid;
-  grid-template-areas: " ";
+.doctor-card {
 }
 
 .doctor-image {
@@ -51,4 +49,16 @@
 
 .credentials h4 {
   white-space: pre-line;
+}
+
+.zip-input {
+  margin-bottom: 2rem;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  margin-right: 7rem;
+  margin-left: 7rem;
+}
+
+.zip-input input {
+  width: 85%;
 }

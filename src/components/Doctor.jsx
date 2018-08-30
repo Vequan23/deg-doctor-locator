@@ -15,6 +15,17 @@ export default function Doctor(props) {
           <p>{props.formattedLocation}</p>
         </div>
       </div>
+
+      // <div className="card">
+      //   <img className="doctor-image" src={Img} alt="" />
+      //   <div className="credentials">
+      //     <h3>{props.fullName}</h3>
+      //     <h4>{props.specialties}</h4>
+      //   </div>
+      //   <div className="location">
+      //     <p>{props.formattedLocation}</p>
+      //   </div>
+      // </div>
     );
   }
 }

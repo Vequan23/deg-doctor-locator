@@ -22,6 +22,12 @@ export default class Home extends Component {
         <div className="showcase">
           <img className="showcase" src={showcaseImage} alt="" />
         </div>
+        <div className="zip-input">
+          <form>
+            <input type="text" />
+          </form>
+          <button className="btn">Search</button>
+        </div>
         <div className="filter-container">
           <div className="distance-filter">
             <label htmlFor="distance">Distance</label>
@@ -44,10 +50,11 @@ export default class Home extends Component {
             fullName={doctor.fullName}
             specialties={doctor.specialties.map(
               specialty => `${specialty}
-              `
+            `
             )}
             formattedLocation={doctor.locations.map(
-              location => `${location.name} ${Math.round(location.distance)}
+              location => `${location.name}
+              ${Math.round(location.distance)} Miles
               `
             )}
           />

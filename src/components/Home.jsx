@@ -41,10 +41,6 @@ export default class Home extends Component {
     const miles = this.state.miles;
     let originalDoctorsData = doctorsJson.results;
 
-    console.log("this is gender" + " " + gender);
-    console.log("this is miles" + " " + miles);
-    console.log(this.state.doctors);
-
     let doctorsFilteredByGender = originalDoctorsData.filter(doctor => {
       if (gender === "Male" || gender === "Female") {
         return doctor.gender === gender;

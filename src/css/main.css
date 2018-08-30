@@ -1,7 +1,6 @@
-@import "App.css";
 @import "doctors.css";
 @import "zip.css";
-@import "filter.css";
+@import "filters.css";
 
 body {
   margin: 0;
@@ -24,6 +23,8 @@ body {
   display: block;
   margin: 0 auto;
   margin-bottom: 5rem;
+  width: 100%;
+  height: auto;
 }
 
 .hidden {

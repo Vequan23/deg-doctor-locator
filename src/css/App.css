@@ -56,6 +56,7 @@
 
 .credentials h3 {
   color: #25aae1;
+  cursor: pointer;
 }
 
 .zip-input {
@@ -75,11 +76,11 @@
   color: white;
 }
 
-.doctor-location span {
+.doctor-location-container span {
   color: #25aae1;
 }
 
-.doctor-location span:hover {
+.doctor-location-container span:hover {
   color: #25aae1;
   cursor: pointer;
 }

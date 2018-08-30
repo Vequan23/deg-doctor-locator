@@ -11,7 +11,7 @@ export default function Doctor(props) {
           alt=""
         />
         <div className="credentials">
-          <h3>{props.fullName}</h3>
+          <h3 onClick={props.sendToDoctorUrl}>{props.fullName}</h3>
           <h4>{props.specialties}</h4>
         </div>
         <div className="location">{props.formattedLocation}</div>

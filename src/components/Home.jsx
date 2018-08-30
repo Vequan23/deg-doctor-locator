@@ -48,6 +48,10 @@ export default class Home extends Component {
     window.location.href = doctorLocation;
   };
 
+  sendToDoctorUrl = doctorUrl => {
+    window.location.href = doctorUrl;
+  };
+
   render() {
     const doctors = this.state.doctors;
 
@@ -72,7 +76,7 @@ export default class Home extends Component {
           <div className="distance-filter">
             <label htmlFor="distance">Distance</label>
             <input type="range" min="1" max="100" id="myRange" />
-            <p>Current: All Miles From</p>
+            <p>Current: All Miles From {this.state.zip}</p>
           </div>
           <div className="results-count">
             <p>Total Results: {doctors.results ? doctors.results.length : 0}</p>
@@ -83,6 +87,7 @@ export default class Home extends Component {
             doctors.results.map(doctor => (
               <Doctor
                 fullName={doctor.fullName}
+                sendToDoctorUrl={this.sendToDoctorUrl.bind(null, doctor.url)}
                 specialties={doctor.specialties.map(
                   specialty => `${specialty}
             `
@@ -90,7 +95,7 @@ export default class Home extends Component {
                 formattedLocation={doctor.locations.map(location =>
                   React.createElement(
                     "div",
-                    { className: "doctor-location" },
+                    { className: "doctor-location-container" },
                     React.createElement(
                       "span",
                       {

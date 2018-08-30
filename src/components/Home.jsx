@@ -66,6 +66,8 @@ export default class Home extends Component {
   };
 
   handleRangeChange = async e => {
+    e.preventDefault();
+
     const showDoctors = this.state.showDoctors;
     if (!showDoctors) {
       alert("Please enter zip to filter");
@@ -78,6 +80,7 @@ export default class Home extends Component {
   };
 
   handleGenderChange = async e => {
+    e.preventDefault();
     const showDoctors = this.state.showDoctors;
     if (!showDoctors) {
       e.preventDefault();
@@ -150,7 +153,7 @@ export default class Home extends Component {
                 name="gender"
                 defaultChecked
               />{" "}
-              No Preference
+              <span>No preference</span>
               <br />
               <input
                 type="radio"
@@ -158,7 +161,7 @@ export default class Home extends Component {
                 value="Male"
                 name="gender"
               />{" "}
-              Male
+              <span>Male</span>
               <br />
               <input
                 type="radio"
@@ -166,7 +169,7 @@ export default class Home extends Component {
                 value="Female"
                 name="gender"
               />
-              Female
+              <span>Female</span>
               <br />
             </div>
           </div>

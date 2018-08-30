@@ -193,10 +193,11 @@ export default class Home extends Component {
                     specialty => `${specialty}
             `
                   )}
-                  formattedLocation={doctor.locations.map(location =>
+                  formattedLocation={doctor.locations.map((location, i) =>
                     React.createElement(
                       "div",
-                      { className: "doctor-location-container" },
+
+                      { className: "doctor-location-container", key: i },
                       React.createElement(
                         "span",
                         {

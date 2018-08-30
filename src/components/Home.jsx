@@ -8,7 +8,29 @@ import showcaseImage from "../assets/images/hospital.png";
 export default class Home extends Component {
   state = {
     doctors: [],
-    showDoctors: false
+    zip: []
+  };
+
+  handleZipChange = e => {
+    this.setState({
+      zip: e.target.value
+    });
+  };
+
+  validateZip = () => {
+    let zip = this.state.zip;
+
+    let convertedZip = this.convertZipInputToNumber(zip);
+
+    if (zip.length !== 5 || !Number.isInteger(convertedZip)) {
+      alert("please check zip");
+    } else {
+      this.filterDoctors();
+    }
+  };
+
+  convertZipInputToNumber = zip => {
+    return Number(zip);
   };
 
   filterDoctors = async () => {
@@ -21,6 +43,7 @@ export default class Home extends Component {
       behavior: "smooth"
     });
   };
+
   render() {
     const doctors = this.state.doctors;
 
@@ -35,27 +58,20 @@ export default class Home extends Component {
         </div>
         <div className="zip-input">
           <form>
-            <input type="text" />
+            <input onChange={this.handleZipChange} type="text" />
           </form>
-          <button onClick={this.filterDoctors} className="btn">
+          <button onClick={this.validateZip} className="btn">
             Search
           </button>
         </div>
         <div className="filter-container">
           <div className="distance-filter">
             <label htmlFor="distance">Distance</label>
-            <input
-              type="range"
-              min="1"
-              max="100"
-              value="50"
-              class="slider"
-              id="myRange"
-            />
+            <input type="range" min="1" max="100" id="myRange" />
             <p>Current: All Miles From</p>
           </div>
           <div className="results-count">
-            <p>Total Results: {doctors ? doctors.length : 0}</p>
+            <p>Total Results: {doctors.results ? doctors.results.length : 0}</p>
           </div>
         </div>
         <div className="doctor-container">
@@ -67,12 +83,14 @@ export default class Home extends Component {
                   specialty => `${specialty}
             `
                 )}
-                formattedLocation={doctor.locations.map(
-                  location => `${location.name}
-              ${Math.round(location.distance)} Miles
+                formattedLocation={[
+                  doctor.locations.map(
+                    location => `${location.name}
+                ${Math.round(location.distance)} Miles
 
-              `
-                )}
+                `
+                  )
+                ]}
                 image={doctor.image ? doctor.image : "avatar.png"}
               />
             ))

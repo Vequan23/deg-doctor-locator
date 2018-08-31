@@ -15,7 +15,7 @@ export default class Home extends Component {
     gender: "noPreference",
     doctorsAreVisible: false,
     scrollPageDownHasBeenRan: false,
-    showLoadingGifIsVisible: false
+    loadingGifIsVisible: false
   };
 
   handleZipChange = e => {
@@ -137,7 +137,7 @@ export default class Home extends Component {
 
   showLoadingGif = () => {
     this.setState({
-      showLoadingGifIsVisible: true
+      loadingGifIsVisible: true
     });
     this.removeLoadingGif();
   };
@@ -145,7 +145,7 @@ export default class Home extends Component {
   removeLoadingGif = () => {
     setTimeout(() => {
       this.setState({
-        showLoadingGifIsVisible: false
+        loadingGifIsVisible: false
       });
     }, 800);
   };
@@ -164,7 +164,7 @@ export default class Home extends Component {
       miles,
       zip,
       doctorsAreVisible,
-      showLoadingGifIsVisible
+      loadingGifIsVisible
     } = this.state;
 
     return (
@@ -243,7 +243,7 @@ export default class Home extends Component {
               doctorsAreVisible ? "doctor-container" : "hidden doctor-container"
             }
           >
-            <div className={showLoadingGifIsVisible ? "" : "hidden"}>
+            <div className={loadingGifIsVisible ? "" : "hidden"}>
               <img className="loading-gif" src={LoadingGif} alt="" />
             </div>
             <div className="results-count">

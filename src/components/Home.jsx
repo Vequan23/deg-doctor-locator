@@ -4,6 +4,8 @@ import doctorsJson from "../api/doctors.json";
 import gradient from "../assets/images/gradient.png";
 import logo from "../assets/images/logo.svg";
 import showcaseImage from "../assets/images/hospital.png";
+import swal from "sweetalert2";
+import LoadingGif from "../assets/images/loading_gif.gif";
 
 export default class Home extends Component {
   state = {
@@ -11,8 +13,9 @@ export default class Home extends Component {
     zip: "",
     miles: "All",
     gender: "noPreference",
-    showDoctors: false,
-    scrollPageDownHasBeenRan: false
+    doctorsAreVisible: false,
+    scrollPageDownHasBeenRan: false,
+    showLoadingGifIsVisible: false
   };
 
   handleZipChange = e => {
@@ -27,9 +30,9 @@ export default class Home extends Component {
     let convertedZip = this.convertZipInputToNumber(zip);
 
     if (zip.length !== 5 || !Number.isInteger(convertedZip)) {
-      alert("please check zip");
+      this.showAlert();
     } else {
-      this.filterDoctors();
+      this.initiateFilters();
     }
   };
 
@@ -37,7 +40,9 @@ export default class Home extends Component {
     return Number(zip);
   };
 
-  filterDoctors = async () => {
+  initiateFilters = async () => {
+    this.showLoadingGif();
+
     let doctorsFilteredByGender = this.filterDoctorsByGender();
     let doctorsFilteredByDistanceAndGender = this.filterDoctorsByDistance(
       doctorsFilteredByGender
@@ -77,7 +82,7 @@ export default class Home extends Component {
 
   showDoctors = () => {
     this.setState({
-      showDoctors: true
+      doctorsAreVisible: true
     });
   };
 
@@ -96,20 +101,20 @@ export default class Home extends Component {
   };
 
   handleRangeChange = async e => {
-    const showDoctors = this.state.showDoctors;
-    if (!showDoctors) {
-      alert("Please enter zip to filter");
+    const doctorsAreVisible = this.state.doctorsAreVisible;
+    if (!doctorsAreVisible) {
+      this.showAlert();
     } else {
       this.setState({
         miles: await e.target.value
       });
-      await this.filterDoctors();
+      await this.initiateFilters();
     }
   };
 
   handleGenderChange = async e => {
-    const showDoctors = this.state.showDoctors;
-    if (!showDoctors) {
+    const doctorsAreVisible = this.state.doctorsAreVisible;
+    if (!doctorsAreVisible) {
       e.preventDefault();
       alert("Please enter zip to filter");
     } else {
@@ -117,8 +122,32 @@ export default class Home extends Component {
         gender: await e.target.value
       });
 
-      await this.filterDoctors();
+      await this.initiateFilters();
     }
+  };
+
+  showAlert = () => {
+    swal({
+      type: "error",
+      title: "Oops...",
+      text: "please enter a valid zip code",
+      footer: "<a href>Why do I have this issue?</a>"
+    });
+  };
+
+  showLoadingGif = () => {
+    this.setState({
+      showLoadingGifIsVisible: true
+    });
+    this.removeLoadingGif();
+  };
+
+  removeLoadingGif = () => {
+    setTimeout(() => {
+      this.setState({
+        showLoadingGifIsVisible: false
+      });
+    }, 800);
   };
 
   sendToDoctorLocation = doctorLocation => {
@@ -130,7 +159,13 @@ export default class Home extends Component {
   };
 
   render() {
-    const { doctors, miles, zip, showDoctors } = this.state;
+    const {
+      doctors,
+      miles,
+      zip,
+      doctorsAreVisible,
+      showLoadingGifIsVisible
+    } = this.state;
 
     return (
       <div>
@@ -155,7 +190,7 @@ export default class Home extends Component {
         </div>
 
         <div className="side-bar-doctor-container">
-          <div className={showDoctors ? "filter-container " : "hidden"}>
+          <div className={doctorsAreVisible ? "filter-container " : "hidden"}>
             <div className="distance-filter">
               <label htmlFor="distance">Distance</label>
               <input
@@ -200,15 +235,19 @@ export default class Home extends Component {
               <span>Female</span>
               <br />
             </div>
+            <div className={showLoadingGifIsVisible ? "" : "hidden"}>
+              <img className="loading-gif" src={LoadingGif} alt="" />
+            </div>
           </div>
           <div
             className={
-              showDoctors ? "doctor-container" : "hidden doctor-container"
+              doctorsAreVisible ? "doctor-container" : "hidden doctor-container"
             }
           >
             <div className="results-count">
               <p>
-                Total Results: {doctors && showDoctors ? doctors.length : 0}
+                Total Results:{" "}
+                {doctors && doctorsAreVisible ? doctors.length : 0}
               </p>
             </div>
             {doctors ? (

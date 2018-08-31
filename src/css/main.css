@@ -30,3 +30,7 @@ body {
 .hidden {
   display: none;
 }
+
+.loading-gif {
+  width: 50px;
+}

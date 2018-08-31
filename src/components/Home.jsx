@@ -11,7 +11,8 @@ export default class Home extends Component {
     zip: [],
     miles: "All",
     gender: "noPreference",
-    showDoctors: false
+    showDoctors: false,
+    scrollPageDownHasBeenRan: false
   };
 
   handleZipChange = e => {
@@ -42,13 +43,56 @@ export default class Home extends Component {
       doctorsFilteredByGender
     );
 
-    this.setState({
-      showDoctors: true
-    });
+    await this.showDoctors();
+
+    this.scrollPageDown();
 
     this.setState({
       doctors: doctorsFilteredByDistanceAndGender
     });
+  };
+
+  filterDoctorsByGender = () => {
+    const gender = this.state.gender;
+    let originalDoctorsData = doctorsJson.results;
+    return originalDoctorsData.filter(doctor => {
+      if (gender === "Male" || gender === "Female") {
+        return doctor.gender === gender;
+      } else {
+        return doctor;
+      }
+    });
+  };
+
+  filterDoctorsByDistance = doctorsFilteredByGender => {
+    const miles = this.state.miles;
+    return doctorsFilteredByGender.filter(doctor => {
+      if (miles === "All") {
+        return doctor;
+      } else {
+        return Math.round(doctor.locations[0].distance) <= miles;
+      }
+    });
+  };
+
+  showDoctors = () => {
+    this.setState({
+      showDoctors: true
+    });
+  };
+
+  scrollPageDown = () => {
+    const { scrollPageDownHasBeenRan } = this.state;
+    if (!scrollPageDownHasBeenRan) {
+      window.scrollBy({
+        top: 600,
+        behavior: "smooth"
+      });
+
+      this.setState({
+        scrollPageDownHasBeenRan: true
+      });
+    }
   };
 
   handleRangeChange = async e => {
@@ -75,29 +119,6 @@ export default class Home extends Component {
 
       await this.filterDoctors();
     }
-  };
-
-  filterDoctorsByGender = () => {
-    const gender = this.state.gender;
-    let originalDoctorsData = doctorsJson.results;
-    return originalDoctorsData.filter(doctor => {
-      if (gender === "Male" || gender === "Female") {
-        return doctor.gender === gender;
-      } else {
-        return doctor;
-      }
-    });
-  };
-
-  filterDoctorsByDistance = doctorsFilteredByGender => {
-    const miles = this.state.miles;
-    return doctorsFilteredByGender.filter(doctor => {
-      if (miles === "All") {
-        return doctor;
-      } else {
-        return Math.round(doctor.locations[0].distance) <= miles;
-      }
-    });
   };
 
   sendToDoctorLocation = doctorLocation => {

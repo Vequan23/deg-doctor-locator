@@ -1,0 +1,86 @@
+@media only screen and (max-width: 992px) {
+  .side-bar-doctor-container {
+    grid-template-columns: 1fr;
+  }
+
+  .filter-container {
+    display: grid;
+    grid-template-columns: auto auto;
+  }
+
+  .distance-filter {
+    margin-bottom: 10px;
+    border-bottom: 0px;
+  }
+
+  .filter-container {
+    margin-bottom: 0px;
+  }
+
+  .zip-input {
+    margin-bottom: 5px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .doctor-card {
+    width: 520px;
+  }
+
+  .specialties h4,
+  h3 {
+    padding-left: 5%;
+  }
+}
+
+@media only screen and (max-width: 656px) {
+  .doctor-card {
+    width: 530px;
+    overflow: hidden;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  .doctor-card {
+    width: 475px;
+  }
+
+  .doctor-container {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .doctor-card {
+    display: inline-block;
+    text-align: center;
+    width: 250px;
+    margin-left: 21%;
+    margin-right: 20%;
+  }
+
+  .doctor-image {
+    border-radius: 50%;
+    margin-bottom: 2%;
+  }
+
+  .results-count {
+    text-align: center;
+    border-top: 2px solid #f2f7fa;
+    padding: 2%;
+  }
+
+  .filter-container {
+    grid-template-columns: auto;
+    text-align: center;
+  }
+
+  .distance-filter {
+    border-bottom: 2px solid #f2f7fa;
+  }
+}

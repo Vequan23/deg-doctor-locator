@@ -1,0 +1,19 @@
+.zip-input {
+  margin-bottom: 4rem;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  background: #eeeeee;
+  padding: 50px;
+}
+
+.zip-input input {
+  width: 85%;
+  padding: 5px;
+}
+
+.zip-input button {
+  background: #5ab44b;
+  color: white;
+}
+
+

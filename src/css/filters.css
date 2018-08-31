@@ -1,0 +1,36 @@
+.filter-container {
+  margin-bottom: 4rem;
+  padding: 25px;
+}
+
+.filter-container label {
+  font-size: 20px;
+  color: #006595;
+}
+
+.distance-filter input {
+  margin-left: 2rem;
+}
+
+.distance-filter p {
+  font-weight: bold;
+}
+
+.results-count p {
+  font-size: 22px;
+  color: #858585;
+}
+
+.gender-filter span {
+  color: #25aae1;
+  padding: 5px;
+}
+
+.distance-filter {
+  border-bottom: 2px solid #f2f7fa;
+  margin-bottom: 2px;
+}
+
+.gender-filter {
+  margin-top: 5px;
+}

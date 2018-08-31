@@ -197,7 +197,7 @@ export default class Home extends Component {
                 onChange={this.handleRangeChange}
                 type="range"
                 min="5"
-                max="25"
+                max="35"
                 step="5"
                 value={miles}
               />

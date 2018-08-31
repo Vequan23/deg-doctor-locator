@@ -193,8 +193,8 @@ export default class Home extends Component {
           <div className={doctorsAreVisible ? "filter-container " : "hidden"}>
             <div className="distance-filter">
               <label htmlFor="distance">Distance</label>
-              {/* increased range to 35 to account for the only doctor further than 25 miles.
-              I couldn't seem to find a way to handle the all selction after initial load :( */}
+              {/* increased max range to 35 to account for the only doctor further than 25 miles.
+              I couldn't seem to find a way to handle the all selection after initial load :( */}
               <input
                 onChange={this.handleRangeChange}
                 type="range"

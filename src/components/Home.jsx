@@ -37,31 +37,17 @@ export default class Home extends Component {
   };
 
   filterDoctors = async () => {
-    const gender = this.state.gender;
-    const miles = this.state.miles;
-    let originalDoctorsData = doctorsJson.results;
-
-    let doctorsFilteredByGender = originalDoctorsData.filter(doctor => {
-      if (gender === "Male" || gender === "Female") {
-        return doctor.gender === gender;
-      } else {
-        return doctor;
-      }
-    });
-
-    let doctorsFilteredByDistance = doctorsFilteredByGender.filter(doctor => {
-      if (miles === "All") {
-        return doctor;
-      } else {
-        return Math.round(doctor.locations[0].distance) <= miles;
-      }
-    });
+    let doctorsFilteredByGender = this.filterDoctorsByGender();
+    let doctorsFilteredByDistanceAndGender = this.filterDoctorsByDistance(
+      doctorsFilteredByGender
+    );
 
     this.setState({
       showDoctors: true
     });
-    await this.setState({
-      doctors: doctorsFilteredByDistance
+
+    this.setState({
+      doctors: doctorsFilteredByDistanceAndGender
     });
   };
 
@@ -90,6 +76,30 @@ export default class Home extends Component {
       await this.filterDoctors();
     }
   };
+
+  filterDoctorsByGender = () => {
+    const gender = this.state.gender;
+    let originalDoctorsData = doctorsJson.results;
+    return originalDoctorsData.filter(doctor => {
+      if (gender === "Male" || gender === "Female") {
+        return doctor.gender === gender;
+      } else {
+        return doctor;
+      }
+    });
+  };
+
+  filterDoctorsByDistance = doctorsFilteredByGender => {
+    const miles = this.state.miles;
+    return doctorsFilteredByGender.filter(doctor => {
+      if (miles === "All") {
+        return doctor;
+      } else {
+        return Math.round(doctor.locations[0].distance) <= miles;
+      }
+    });
+  };
+
   sendToDoctorLocation = doctorLocation => {
     window.location.href = doctorLocation;
   };

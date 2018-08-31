@@ -5,7 +5,7 @@ import gradient from "../assets/images/gradient.png";
 import logo from "../assets/images/logo.svg";
 import showcaseImage from "../assets/images/hospital.png";
 import swal from "sweetalert2";
-import LoadingGif from "../assets/images/loading_gif.gif";
+import LoadingGif from "../assets/images/loading_gif2.gif";
 
 export default class Home extends Component {
   state = {
@@ -235,15 +235,15 @@ export default class Home extends Component {
               <span>Female</span>
               <br />
             </div>
-            <div className={showLoadingGifIsVisible ? "" : "hidden"}>
-              <img className="loading-gif" src={LoadingGif} alt="" />
-            </div>
           </div>
           <div
             className={
               doctorsAreVisible ? "doctor-container" : "hidden doctor-container"
             }
           >
+            <div className={showLoadingGifIsVisible ? "" : "hidden"}>
+              <img className="loading-gif" src={LoadingGif} alt="" />
+            </div>
             <div className="results-count">
               <p>
                 Total Results:{" "}

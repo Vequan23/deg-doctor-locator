@@ -4,14 +4,18 @@ import doctorsJson from "../api/doctors.json";
 import gradient from "../assets/images/gradient.png";
 import logo from "../assets/images/logo.svg";
 import showcaseImage from "../assets/images/hospital.png";
+import swal from "sweetalert2";
+import LoadingGif from "../assets/images/loading_gif2.gif";
 
 export default class Home extends Component {
   state = {
     doctors: doctorsJson.results,
-    zip: [],
+    zip: "",
     miles: "All",
     gender: "noPreference",
-    showDoctors: false
+    doctorsAreVisible: false,
+    scrollPageDownHasBeenRan: false,
+    showLoadingGifIsVisible: false
   };
 
   handleZipChange = e => {
@@ -26,9 +30,9 @@ export default class Home extends Component {
     let convertedZip = this.convertZipInputToNumber(zip);
 
     if (zip.length !== 5 || !Number.isInteger(convertedZip)) {
-      alert("please check zip");
+      this.showAlert();
     } else {
-      this.filterDoctors();
+      this.initiateFilters();
     }
   };
 
@@ -36,53 +40,81 @@ export default class Home extends Component {
     return Number(zip);
   };
 
-  filterDoctors = async () => {
-    const gender = this.state.gender;
-    const miles = this.state.miles;
-    let originalDoctorsData = doctorsJson.results;
+  initiateFilters = async () => {
+    this.showLoadingGif();
 
-    let doctorsFilteredByGender = originalDoctorsData.filter(doctor => {
+    let doctorsFilteredByGender = this.filterDoctorsByGender();
+    let doctorsFilteredByDistanceAndGender = this.filterDoctorsByDistance(
+      doctorsFilteredByGender
+    );
+
+    await this.showDoctors();
+
+    this.scrollPageDown();
+
+    this.setState({
+      doctors: doctorsFilteredByDistanceAndGender
+    });
+  };
+
+  filterDoctorsByGender = () => {
+    const gender = this.state.gender;
+    let originalDoctorsData = doctorsJson.results;
+    return originalDoctorsData.filter(doctor => {
       if (gender === "Male" || gender === "Female") {
         return doctor.gender === gender;
       } else {
         return doctor;
       }
     });
+  };
 
-    let doctorsFilteredByDistance = doctorsFilteredByGender.filter(doctor => {
+  filterDoctorsByDistance = doctorsFilteredByGender => {
+    const miles = this.state.miles;
+    return doctorsFilteredByGender.filter(doctor => {
       if (miles === "All") {
         return doctor;
       } else {
         return Math.round(doctor.locations[0].distance) <= miles;
       }
     });
+  };
 
+  showDoctors = () => {
     this.setState({
-      showDoctors: true
-    });
-    await this.setState({
-      doctors: doctorsFilteredByDistance
+      doctorsAreVisible: true
     });
   };
 
-  handleRangeChange = async e => {
-    e.preventDefault();
+  scrollPageDown = () => {
+    const { scrollPageDownHasBeenRan } = this.state;
+    if (!scrollPageDownHasBeenRan) {
+      window.scrollBy({
+        top: 600,
+        behavior: "smooth"
+      });
 
-    const showDoctors = this.state.showDoctors;
-    if (!showDoctors) {
-      alert("Please enter zip to filter");
+      this.setState({
+        scrollPageDownHasBeenRan: true
+      });
+    }
+  };
+
+  handleRangeChange = async e => {
+    const doctorsAreVisible = this.state.doctorsAreVisible;
+    if (!doctorsAreVisible) {
+      this.showAlert();
     } else {
       this.setState({
         miles: await e.target.value
       });
-      await this.filterDoctors();
+      await this.initiateFilters();
     }
   };
 
   handleGenderChange = async e => {
-    e.preventDefault();
-    const showDoctors = this.state.showDoctors;
-    if (!showDoctors) {
+    const doctorsAreVisible = this.state.doctorsAreVisible;
+    if (!doctorsAreVisible) {
       e.preventDefault();
       alert("Please enter zip to filter");
     } else {
@@ -90,9 +122,34 @@ export default class Home extends Component {
         gender: await e.target.value
       });
 
-      await this.filterDoctors();
+      await this.initiateFilters();
     }
   };
+
+  showAlert = () => {
+    swal({
+      type: "error",
+      title: "Oops...",
+      text: "please enter a valid zip code",
+      footer: "<a href>Why do I have this issue?</a>"
+    });
+  };
+
+  showLoadingGif = () => {
+    this.setState({
+      showLoadingGifIsVisible: true
+    });
+    this.removeLoadingGif();
+  };
+
+  removeLoadingGif = () => {
+    setTimeout(() => {
+      this.setState({
+        showLoadingGifIsVisible: false
+      });
+    }, 800);
+  };
+
   sendToDoctorLocation = doctorLocation => {
     window.location.href = doctorLocation;
   };
@@ -102,7 +159,13 @@ export default class Home extends Component {
   };
 
   render() {
-    const { doctors, miles, zip, showDoctors } = this.state;
+    const {
+      doctors,
+      miles,
+      zip,
+      doctorsAreVisible,
+      showLoadingGifIsVisible
+    } = this.state;
 
     return (
       <div>
@@ -127,14 +190,16 @@ export default class Home extends Component {
         </div>
 
         <div className="side-bar-doctor-container">
-          <div className={showDoctors ? "filter-container " : "hidden"}>
+          <div className={doctorsAreVisible ? "filter-container " : "hidden"}>
             <div className="distance-filter">
               <label htmlFor="distance">Distance</label>
+              {/* increased range to 35 to account for the only doctor further than 25 miles.
+              I couldn't seem to find a way to handle the all selction after initial load :( */}
               <input
                 onChange={this.handleRangeChange}
                 type="range"
                 min="5"
-                max="25"
+                max="35"
                 step="5"
                 value={miles}
               />
@@ -175,12 +240,16 @@ export default class Home extends Component {
           </div>
           <div
             className={
-              showDoctors ? "doctor-container" : "hidden doctor-container"
+              doctorsAreVisible ? "doctor-container" : "hidden doctor-container"
             }
           >
+            <div className={showLoadingGifIsVisible ? "" : "hidden"}>
+              <img className="loading-gif" src={LoadingGif} alt="" />
+            </div>
             <div className="results-count">
               <p>
-                Total Results: {doctors && showDoctors ? doctors.length : 0}
+                Total Results:{" "}
+                {doctors && doctorsAreVisible ? doctors.length : 0}
               </p>
             </div>
             {doctors ? (

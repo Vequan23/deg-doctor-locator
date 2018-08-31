@@ -8,7 +8,7 @@ import showcaseImage from "../assets/images/hospital.png";
 export default class Home extends Component {
   state = {
     doctors: doctorsJson.results,
-    zip: [],
+    zip: "",
     miles: "All",
     gender: "noPreference",
     showDoctors: false,

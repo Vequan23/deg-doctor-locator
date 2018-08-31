@@ -66,8 +66,6 @@ export default class Home extends Component {
   };
 
   handleRangeChange = async e => {
-    e.preventDefault();
-
     const showDoctors = this.state.showDoctors;
     if (!showDoctors) {
       alert("Please enter zip to filter");
@@ -80,7 +78,6 @@ export default class Home extends Component {
   };
 
   handleGenderChange = async e => {
-    e.preventDefault();
     const showDoctors = this.state.showDoctors;
     if (!showDoctors) {
       e.preventDefault();
